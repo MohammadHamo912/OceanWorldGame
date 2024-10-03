@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://djw1cmf03hkjn"]
+
+[ext_resource type="Texture2D" uid="uid://cqm2nnpyt4je1" path="res://assets/playerSprites/playerGame.png" id="1_2pu1n"]
+
+[sub_resource type="GDScript" id="GDScript_sfcvm"]
+script/source = "extends CharacterBody2D
+
+const speed = 100
+
+func _physics_process(delta):
+	player_movement(delta)
+
+func player_movement(delta):
+	if Input.is_action_pressed(\"ui_right\"):
+		velocity.x = speed
+		velocity.y =0
+	elif Input.is_action_pressed(\"ui_left\"):
+		velocity.x = -speed
+		velocity.y =0
+	elif Input.is_action_pressed(\"ui_up\"):
+		velocity.x = 0
+		velocity.y = speed
+	elif Input.is_action_pressed(\"ui_down\"):
+		velocity.x = 0
+		velocity.y = -speed
+	else:
+		velocity.x = 0
+		velocity.y = 0
+	
+	move_and_slide()
+
+
+# Called when the node enters the scene tree for the first time.
+#func _ready() -> void:
+#	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta: float) -> void:
+#	pass
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g5qsg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2pu1n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evk4k"]
+size = Vector2(17, 31)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = SubResource("GDScript_sfcvm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.00242, 1)
+sprite_frames = SubResource("SpriteFrames_g5qsg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, -0.5)
+shape = SubResource("RectangleShape2D_evk4k")
