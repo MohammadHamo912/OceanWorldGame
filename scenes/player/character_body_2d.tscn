@@ -1,33 +1,84 @@
-[gd_scene load_steps=5 format=3 uid="uid://djw1cmf03hkjn"]
+[gd_scene load_steps=7 format=3 uid="uid://djw1cmf03hkjn"]
 
-[ext_resource type="Texture2D" uid="uid://cqm2nnpyt4je1" path="res://assets/playerSprites/playerGame.png" id="1_2pu1n"]
+[ext_resource type="Texture2D" uid="uid://b7p5vbijs1w8u" path="res://assets/playerSprites/objectt0.png" id="1_ptlq0"]
+[ext_resource type="Texture2D" uid="uid://bndtiyh6kwsrh" path="res://assets/playerSprites/move1.png" id="2_6n8sa"]
+[ext_resource type="Texture2D" uid="uid://goqw7gct55tu" path="res://assets/playerSprites/move2.png" id="3_rvd88"]
 
 [sub_resource type="GDScript" id="GDScript_sfcvm"]
 script/source = "extends CharacterBody2D
 
 const speed = 100
+var current_direction = \"none\"
 
 func _physics_process(delta):
 	player_movement(delta)
 
 func player_movement(delta):
 	if Input.is_action_pressed(\"ui_right\"):
+		current_direction = \"right\"
+		play_anim(1)
 		velocity.x = speed
 		velocity.y =0
 	elif Input.is_action_pressed(\"ui_left\"):
+		current_direction = \"left\"
+		play_anim(1)
 		velocity.x = -speed
 		velocity.y =0
 	elif Input.is_action_pressed(\"ui_up\"):
+		current_direction = \"up\"
+		play_anim(1)
 		velocity.x = 0
 		velocity.y = -speed
 	elif Input.is_action_pressed(\"ui_down\"):
+		current_direction = \"down\"
+		play_anim(1)
 		velocity.x = 0
 		velocity.y = speed
 	else:
+		play_anim(0)
 		velocity.x = 0
 		velocity.y = 0
 	
 	move_and_slide()
+
+
+
+func play_anim(movement):
+	var dir = current_direction
+	var anim = $AnimatedSprite2D
+	
+	if dir == \"right\":
+		anim.flip_h =false
+		if movement == 1:
+			anim.play(\"side_walk\")
+		elif movement == 0:
+			anim.play(\"side_idle\")
+	
+	if dir == \"left\":
+		anim.flip_h =false
+		if movement == 1:
+			anim.play(\"side_walk\")
+		elif movement == 0:
+			anim.play(\"side_idle\")
+
+
+	if dir == \"up\":
+		anim.flip_h =false
+		if movement == 1:
+			anim.play(\"front_walk\")
+		elif movement == 0:
+			anim.play(\"front_idle\")
+
+
+
+	if dir == \"down\":
+		anim.flip_h =false
+		if movement == 1:
+			anim.play(\"back_walk\")
+		elif movement == 0:
+			anim.play(\"back_idle\")
+
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,25 +93,62 @@ func player_movement(delta):
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5qsg"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"back_idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"back_walk",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_2pu1n")
+"texture": ExtResource("1_ptlq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6n8sa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rvd88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rvd88")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"front_idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"front_walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"side_idle",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evk4k"]
-size = Vector2(17, 31)
+size = Vector2(376, 684)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(-113, -175)
 script = SubResource("GDScript_sfcvm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(5, 4.99)
+position = Vector2(83, 629)
+scale = Vector2(1, 0.998)
 sprite_frames = SubResource("SpriteFrames_g5qsg")
+animation = &"front_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, -0.5)
+position = Vector2(90, 628)
 shape = SubResource("RectangleShape2D_evk4k")
