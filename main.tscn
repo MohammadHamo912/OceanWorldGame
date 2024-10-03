@@ -1,8 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://b3gwlyyoclt2m"]
+[gd_scene load_steps=8 format=4 uid="uid://c3ngi05fbajbg"]
 
+<<<<<<< HEAD
 [ext_resource type="Texture2D" path="res://brown scrren.jpeg" id="1_d51wm"]
 [ext_resource type="Texture2D" path="res://background.jpg" id="2_gnuu8"]
 [ext_resource type="Texture2D" path="res://Water.jpg" id="3_fgwqc"]
+=======
+[ext_resource type="Texture2D" uid="uid://cixtduvn4j2cy" path="res://assets/surrounding/brown scrren.jpeg" id="1_d51wm"]
+[ext_resource type="Texture2D" uid="uid://84ufg8ykoygr" path="res://assets/surrounding/background.jpg" id="2_gnuu8"]
+[ext_resource type="Texture2D" uid="uid://bvu5l5dd7m8cw" path="res://assets/surrounding/Water.jpg" id="3_fgwqc"]
+>>>>>>> 590e7b29b034b0745855fb2db4245ad2560c601b
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_koi12"]
 texture = ExtResource("2_gnuu8")
