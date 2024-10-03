@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://djw1cmf03hkjn"]
+[gd_scene load_steps=14 format=3 uid="uid://djw1cmf03hkjn"]
 
-[ext_resource type="Texture2D" uid="uid://b7p5vbijs1w8u" path="res://assets/playerSprites/objectt0.png" id="1_ptlq0"]
+[ext_resource type="Texture2D" uid="uid://b7p5vbijs1w8u" path="res://assets/playerSprites/sprite_LeftSide.png" id="1_ptlq0"]
 [ext_resource type="Texture2D" uid="uid://bndtiyh6kwsrh" path="res://assets/playerSprites/move1.png" id="2_6n8sa"]
+[ext_resource type="Texture2D" uid="uid://cprc1734vxmwb" path="res://assets/playerSprites/down_walk_sprite_0.png" id="2_fv6ew"]
+[ext_resource type="Texture2D" uid="uid://cx506ek8y157d" path="res://assets/playerSprites/down_walk_sprite_1.png" id="3_fa80f"]
+[ext_resource type="Texture2D" uid="uid://3oh3mwc3ri6g" path="res://assets/playerSprites/sprite_face.png" id="3_kirmi"]
 [ext_resource type="Texture2D" uid="uid://goqw7gct55tu" path="res://assets/playerSprites/move2.png" id="3_rvd88"]
+[ext_resource type="Texture2D" uid="uid://b7vvgk51b4oax" path="res://assets/playerSprites/damage.png" id="5_npia8"]
+[ext_resource type="Texture2D" uid="uid://ba11uk84fhe06" path="res://assets/playerSprites/objectt.png" id="6_7sduu"]
+[ext_resource type="Texture2D" uid="uid://bnat0bko2p35v" path="res://assets/playerSprites/right_side_idle.png" id="6_puvgd"]
+[ext_resource type="Texture2D" uid="uid://vm4soslejl75" path="res://assets/playerSprites/right_walk_sprite_0.png" id="7_l5iyc"]
+[ext_resource type="Texture2D" uid="uid://c63p20xj2t0f8" path="res://assets/playerSprites/right_walk_sprite_1.png" id="8_auhta"]
 
 [sub_resource type="GDScript" id="GDScript_sfcvm"]
 script/source = "extends CharacterBody2D
@@ -50,9 +58,9 @@ func play_anim(movement):
 	if dir == \"right\":
 		anim.flip_h =false
 		if movement == 1:
-			anim.play(\"side_walk\")
+			anim.play(\"right_side_walk\")
 		elif movement == 0:
-			anim.play(\"side_idle\")
+			anim.play(\"right_side_idle\")
 	
 	if dir == \"left\":
 		anim.flip_h =false
@@ -93,12 +101,24 @@ func play_anim(movement):
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5qsg"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kirmi")
+}],
 "loop": true,
 "name": &"back_idle",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fv6ew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fa80f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kirmi")
+}],
 "loop": true,
 "name": &"back_walk",
 "speed": 5.0
@@ -106,7 +126,58 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_ptlq0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kirmi")
+}],
+"loop": true,
+"name": &"front_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_npia8")
+}],
+"loop": true,
+"name": &"front_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_puvgd")
+}],
+"loop": true,
+"name": &"right_side_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_puvgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l5iyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_auhta")
+}],
+"loop": true,
+"name": &"right_side_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7sduu")
+}],
+"loop": true,
+"name": &"side_idle",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_6n8sa")
 }, {
@@ -114,41 +185,22 @@ animations = [{
 "texture": ExtResource("3_rvd88")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_rvd88")
+"texture": ExtResource("1_ptlq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7sduu")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"front_idle",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"front_walk",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"side_idle",
+"name": &"side_walk",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evk4k"]
-size = Vector2(376, 684)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(-113, -175)
 script = SubResource("GDScript_sfcvm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(83, 629)
-scale = Vector2(1, 0.998)
+position = Vector2(32, 712)
+scale = Vector2(0.282, 0.3)
 sprite_frames = SubResource("SpriteFrames_g5qsg")
-animation = &"front_walk"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(90, 628)
-shape = SubResource("RectangleShape2D_evk4k")
+animation = &"right_side_walk"
